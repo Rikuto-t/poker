@@ -1,5 +1,12 @@
 class HomeController < ApplicationController
   def check
-    @hand = params[:hand]
+
+    @hands = params[:hands]
+    hands = params[:hands]
+
+
+
+    @answer = Hands::CheckService.check_hands(hands)
+
   end
 end
