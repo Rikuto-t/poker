@@ -11,7 +11,7 @@ class HandValidator < ActiveModel::EachValidator
       hand_array = hand.split
       while i <= 5
         solo_hand = hand_array[i-1]
-        unless solo_hand =~ /[SHDC][1-9]/ || solo_hand =~ /[SHDC][1-9][1-3]]/
+        unless solo_hand =~ /[SHDC][1-9]/ && solo_hand[1,2].to_i < 14 || solo_hand =~ /[SHDC][1][1-3]/ && solo_hand[1,2].to_i < 14
           record.errors.add(attribute, "#{x}組目の#{i}番目のカード文字が不正です (#{solo_hand})")
         end
         i = i + 1
@@ -35,3 +35,4 @@ class HandNumValidator < ActiveModel::EachValidator
     end
   end
 end
+

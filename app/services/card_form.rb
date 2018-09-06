@@ -18,7 +18,8 @@ module CardForm
           return true
         end
       end
-      if hand === [1,2,3,4,13] || hand === [1,2,3,12,13] || hand === [1,2,11,12,13] || hand === [1,10,11,12,13]
+      # if hand === [1,2,3,4,13] || hand === [1,2,3,12,13] || hand === [1,2,11,12,13] || hand === [1,10,11,12,13]
+       if hand == [1,10,11,12,13]
         return true
       end
     end
