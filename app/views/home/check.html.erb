@@ -1,6 +1,8 @@
-<h1>Check a Porker Hand</h1>
-<%= form_tag("/home/check") do %>
-  <input type="text" name="hands" value="<%= @hands %>">
-  <input type="submit">
-  <p><%= @answer %></p>
-<% end %>
+<div class="bg text-center">
+  <h1 class="py-5">Check a Porker Hand</h1>
+  <%= form_tag("/home/check") do %>
+    <input type="text" name="hands" value="<%= @hands %>">
+    <input type="submit" value="Check">
+    <p class="py-5">役：<%= @answer %></p>
+  <% end %>
+</div>
