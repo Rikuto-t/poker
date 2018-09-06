@@ -25,6 +25,11 @@ module CardForm
 
     # 役判定メソッド
     def yaku
+
+      answer_array = Array.new
+
+      score = Array.new
+
       hands_array = @hands.split(",")
       hands_array.each do |hand|
         hand_array = hand.split #1組のハンドを文字列から配列にしたもの
@@ -40,28 +45,54 @@ module CardForm
           x += 1
         end
 
+
+
         if hand_array[0][0,1] == hand_array[1][0,1] && hand_array[1][0,1] == hand_array[2][0,1] && hand_array[2][0,1] == hand_array[3][0,1] && hand_array[3][0,1] == hand_array[4][0,1] #フラッシュ系判定
           if judge_straight(hand_num_array)
-            return "ストレートフラッシュ"
+            # return "ストレートフラッシュ"
+            answer_array.push({hand: hand, answer: "ストレートフラッシュ", best: false})
+            score.push(9)
           else
-            return "フラッシュ"
+            # return "フラッシュ"
+            answer_array.push({hand:hand, answer:"フラッシュ" ,best: false})
+            score.push(6)
           end
         elsif judge_straight(hand_num_array)
-          return "ストレート"
+          # return "ストレート"
+          answer_array.push({hand:hand, answer:"ストレート" ,best: false})
+          score.push(5)
         elsif pairs_array == [4]
-          return "4カード"
+          # return "4カード"
+          answer_array.push({hand:hand, answer:"4カード" ,best: false})
+          score.push(8)
         elsif pairs_array == [2,3] || pairs_array == [3,2]
-          return "フルハウス"
+          # return "フルハウス"
+          answer_array.push({hand:hand, answer:"フルハウス" ,best: false})
+          score.push(7)
         elsif pairs_array == [3]
-          return "3カード"
+          # return "3カード"
+          answer_array.push({hand:hand, answer:"3カード" ,best: false})
+          score.push(4)
         elsif pairs_array == [2,2]
-          return "2ペア"
+          # return "2ペア"
+          answer_array.push({hand:hand, answer:"2ペア" ,best: false})
+          score.push(3)
         elsif pairs_array == [2]
-          return  "2カード"
+          # return  "2カード"
+          answer_array.push({hand:hand, answer:"2カード" ,best: false})
+          score.push(2)
         else
-          return "ハイカード"
+          # return "ハイカード"
+          answer_array.push({hand:hand, answer:"ハイカード" ,best: false})
+          score.push(1)
         end
       end
+
+      # 一番強いカードの:bestをtrueに変更
+      answer_array[score.index(score.max)][:best] = true
+
+      # 戻り値
+      answer_array
     end
   end
 end

@@ -11,14 +11,14 @@ class HomeController < ApplicationController
     @hands = params[:hands]
     hands = params[:hands]
 
-    hands = hands || "C5 H5 D5 D12 C10"
+    hands = hands || "C5 H5 D5 D12 C10,C5 H5 D5 D12 C10"
 
     # @answer = Hands::CheckService.check_hands(hands)
 
 
     hand = CardForm.new(hands)
-    #
-    @answer = hand.yaku
+
+    @answers = hand.yaku
 
   end
 end

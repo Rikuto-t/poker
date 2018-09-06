@@ -7,10 +7,17 @@
   background-image: url(/assets/poker_image.jpg);
   height: 600px;
   background-size: cover;
-
   color: #fff;
   p{
     font-size: x-large;
   }
 
+}
+.bg-mask{
+  //height: 100%;
+  background: rgba(255,255,255,0.8);
+}
+
+table{
+  color:black;
 }
