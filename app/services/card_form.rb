@@ -23,7 +23,7 @@ module CardForm
       end
     end
 
-    # 役判定メソッド
+    # 役判定メインメソッド
     def yaku
 
       answer_array = Array.new
@@ -95,4 +95,19 @@ module CardForm
       answer_array
     end
   end
+
+  #バリデーション
+  class Hand < ApplicationRecord
+
+    include ActiveModel::Model
+
+    attr_accessor :content
+
+    validates :content, presence: {message:'5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）'}
+
+    # 以下のバリデーションはmodels/hand_validator.rbに記述されている
+    validates :content, hand: true
+    validates :content, hand_num: true
+  end
+
 end

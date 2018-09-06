@@ -5,4 +5,9 @@ class Hand < ApplicationRecord
   #   self.save!
   # end
 
+  # validates :content, presence: true
+
+
+
+
 end

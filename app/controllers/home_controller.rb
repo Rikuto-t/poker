@@ -1,9 +1,10 @@
-# require_relative '../services/hands/check2_service'
-
 class HomeController < ApplicationController
   include CardForm
 
-  # require '../services/hands/card_form.rb'
+
+  def top
+    @hand = Hand.new
+  end
 
 
   def check
@@ -11,14 +12,21 @@ class HomeController < ApplicationController
     @hands = params[:hands]
     hands = params[:hands]
 
-    hands = hands || "C5 H5 D5 D12 C10,C5 H5 D5 D12 C10"
+    @hand = Hand.new(content:hands)
+
+    if @hand.valid?
+      hand = CardForm.new(hands)
+      @answers = hand.yaku
+    else
+      render("home/top")
+    end
+
+    # hands = hands || "C5 H5 D5 D12 C10,C5 H5 D5 D12 C10"
 
     # @answer = Hands::CheckService.check_hands(hands)
 
 
-    hand = CardForm.new(hands)
 
-    @answers = hand.yaku
 
   end
 end
