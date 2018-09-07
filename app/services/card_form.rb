@@ -79,7 +79,7 @@ module CardForm
           answer_array.push({hand:hand, answer:"2ペア" ,best: false})
           score.push(3)
         elsif pairs_array == [2]
-          # return  "2カード"
+          # return  "ワンペア"
           answer_array.push({hand:hand, answer:"2カード" ,best: false})
           score.push(2)
         else

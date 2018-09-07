@@ -9,10 +9,10 @@ class HomeController < ApplicationController
 
   def check
 
-    @hands = params[:hands]
+    @input_hands = params[:hands]
     hands = params[:hands]
 
-    @hand = Hand.new(content:hands)
+    @hand = Hand.new(content: hands)
 
     if @hand.valid?
       hand = CardForm.new(hands)
@@ -24,8 +24,6 @@ class HomeController < ApplicationController
     # hands = hands || "C5 H5 D5 D12 C10,C5 H5 D5 D12 C10"
 
     # @answer = Hands::CheckService.check_hands(hands)
-
-
 
 
   end
