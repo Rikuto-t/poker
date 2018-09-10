@@ -114,10 +114,55 @@ module CardForm
 
     validates :content, presence: {message: '5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）'}
 
-    # 以下のバリデーションはmodels/hand_validator.rbに記述されている
+    validate :hand_num
+    validate :hand_form
+    validate :my_unique
 
-    validates :content, hand: true, hand_num: true, unique: true
+    ##以下自作バリデーション
+    # 手札入力が正しい形かチェックするバリデーション
+    def hand_form
+      hands = content
+      hands_array = hands.split(",")
+      x = 1
+      hands_array.each do |hand|
+        i = 1
+        hand_array = hand.split
+        while i <= 5
+          solo_hand = hand_array[i - 1]
+          unless solo_hand =~ /^[SDHC][1-9]$/ || solo_hand =~ /^[SDHC]1[1-3]$/
+
+            # 以下コメントアウトは複数組受付時のエラー
+            # record.errors.add(attribute, "#{x}組目の#{i}番目のカード文字が不正です (#{solo_hand})")
+            errors.add(:content, "#{i}番目のカード文字が不正です (#{solo_hand})")
+          end
+          i = i + 1
+        end
+        x = x + 1
+      end
+    end
+
+    #手札の枚数確認バリデーション
+    def hand_num
+      hands = content
+      hands_array = hands.split(",")
+      hands_array.each do |hand|
+        unless hand.split.length == 5
+          errors.add(:content, "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）")
+        end
+      end
+    end
+
+    # 重複チェックバリデーション
+    def my_unique
+      hands = content
+      hands_array = hands.split(",")
+      hands_array.each do |hand|
+        hand_array = hand.split
+        errors.add(:content, "同じカードが入力されています") if hand_array[0] == hand_array[1] || hand_array[1] == hand_array[2] || hand_array[2] == hand_array[3] || hand_array[3] == hand_array[4]
+      end
+    end
+
 
   end
-
 end
+

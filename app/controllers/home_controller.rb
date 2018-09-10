@@ -12,11 +12,11 @@ class HomeController < ApplicationController
     # @input_hands = params[:hands]
     @hands = params[:hands]
 
-    @hand = Hand.new(content: @hands)
+    @hand_valid = Hand.new(content: @hands)
     hand = CardForm.new(@hands)
 
 
-    if @hand.valid?
+    if @hand_valid.valid?
       @answers = hand.yaku
     else
       render("home/top")

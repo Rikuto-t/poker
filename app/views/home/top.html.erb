@@ -8,10 +8,12 @@
 
       <!--      エラーメッセージ-->
       <div class="alert-danger text-center mt-3">
-        <% @hand.errors.full_messages.each do |message| %>
-          <%= message %>/
-        <% end %>
+<!--        エラーを複数同時に表示する場合は以下コメントアウト部を使用-->
+        <%# @hand.errors.full_messages.each do |message| %>
+          <%#= message %>
+        <%# end %>
 
+        <%= @hand_valid.errors.full_messages[0] %>
       </div>
 
     <% end %>
