@@ -12,9 +12,9 @@ class HomeController < ApplicationController
     @input_hands = params[:hands]
     hands = params[:hands]
 
-    @hand = Hand.new(content: hands)
+    @hand_valid = Hand.new(content: hands) #バリデーション用変数
 
-    if @hand.valid?
+    if @hand_valid.valid?
       hand = CardForm.new(hands)
       @answers = hand.yaku
     else

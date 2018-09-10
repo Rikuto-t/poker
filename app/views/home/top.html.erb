@@ -8,7 +8,7 @@
 
       <!--      エラーメッセージ-->
       <div class="alert-danger text-center mt-3">
-        <% @hand.errors.full_messages.each do |message| %>
+        <% @hand_valid.errors.full_messages.each do |message| %>
           <%= message %>
         <% end %>
       </div>

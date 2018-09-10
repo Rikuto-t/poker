@@ -12,13 +12,15 @@
           <tr>
             <th>手札</th>
             <th>役名</th>
-            <th>一番強い手札</th>
+<!--            課題1用に消してる-->
+<!--            <th>一番強い手札</th>-->
           </tr>
           <% @answers.each do |answer| %>
             <tr>
               <td><%= answer[:hand] %></td>
               <td><%= answer[:answer] %></td>
-              <td><%= answer[:best] %></td>
+<!--              課題1用に消してる-->
+<!--              <td><%#= answer[:best] %></td>-->
             </tr>
           <% end %>
         </table>
