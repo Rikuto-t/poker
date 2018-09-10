@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 describe HomeController, type: :controller do
-  # before do
-  #   params[:hands] = "S8 S7 S6 S5 S12"
-  # end
   describe 'Get #top' do
     before do
       get :top
@@ -17,25 +14,29 @@ describe HomeController, type: :controller do
   end
 
   describe 'Post #check' do
-    before do
 
-    end
     it 'リクエストは200 OKとなること' do
       expect(response.status).to eq 200
     end
 
-
-    context 'バリデーションが通った場合' do
-
-      it 'フラッシュ判定' do
-        # @hand = Hand.new(content: hands)
-        # @hand.valid? == true
-        post :check, params: {hands: "S8 S7 S6 S5 S1"}
-        answer = controller.instance_variable_get("@answers")[0][:answer]
-        expect(answer).to eq "フラッシュ"
+    context 'エラーが出る時' do
+      describe '再読み込みした時'
+      it 'rootにリダイレクトすること' do
+        get :check
+        expect(response).to redirect_to root_path
+      end
+      describe '不正な値がpostされた時'
+      it ':topテンプレートを表示すること' do
+        post :check, params: {hands: ""}
+        expect(response).to render_template :top
       end
     end
 
-
+    context 'エラーが出ない時' do
+      it '有効な値がpostされた時' do
+        post :check, params: {hands: "S8 S7 S6 S5 S1"}
+        expect(controller.instance_variable_get("@answers")[0][:answer]).to eq "フラッシュ"
+      end
+    end
   end
 end
