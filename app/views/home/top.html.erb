@@ -2,15 +2,16 @@
   <div class=" text-center">
     <h1 class="py-5">Check a Porker Hand</h1>
     <%= form_tag("/home/check") do %>
-      <input type="text" name="hands" value="<%= @input_hands %>">
+      <input type="text" name="hands" value="<%= @hands %>">
       <input type="submit" value="Check">
       </div>
 
       <!--      エラーメッセージ-->
       <div class="alert-danger text-center mt-3">
-        <% @hand_valid.errors.full_messages.each do |message| %>
-          <%= message %>
+        <% @hand.errors.full_messages.each do |message| %>
+          <%= message %>/
         <% end %>
+
       </div>
 
     <% end %>

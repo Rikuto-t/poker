@@ -2,6 +2,7 @@ module CardForm
   class CardForm
     attr_accessor :hands
 
+
     def initialize(hands)
       @hands = hands
     end
@@ -97,14 +98,14 @@ module CardForm
       end
 
       # 一番強いカードの:bestをtrueに変更
-      answer_array[score.(score.max)][:best] = true
+      answer_array[score.index(score.max)][:best] = true
 
       # 戻り値
       answer_array
     end
   end
 
-  #バリデーション
+  # バリデーション
   class Hand < ApplicationRecord
 
     include ActiveModel::Model
@@ -114,8 +115,9 @@ module CardForm
     validates :content, presence: {message: '5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）'}
 
     # 以下のバリデーションはmodels/hand_validator.rbに記述されている
-    validates :content, hand: true
-    validates :content, hand_num: true
+
+    validates :content, hand: true, hand_num: true, unique: true
+
   end
 
 end

@@ -2,10 +2,10 @@
   <div class=" text-center">
     <h1 class="py-5">Check a Porker Hand</h1>
     <%= form_tag("/home/check") do %>
-      <input type="text" name="hands" value="<%= @input_hands %>">
+      <input type="text" name="hands" value="<%= @hands %>">
       <input type="submit" value="Check">
       </div>
-
+      <%= @error_message %>
       <!--    <p class="py-5">役：<%#= @answer %></p>-->
       <div class="bg-mask">
         <table class="table my-5 table-striped">
