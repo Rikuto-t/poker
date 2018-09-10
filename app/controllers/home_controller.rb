@@ -4,23 +4,24 @@ class HomeController < ApplicationController
 
   def top
     @hand = Hand.new
+    @hand_valid = Hand.new
   end
 
 
   def check
-
-    # @input_hands = params[:hands]
-    @hands = params[:hands]
-
-    @hand_valid = Hand.new(content: @hands)
-    hand = CardForm.new(@hands)
-
-
-    if @hand_valid.valid?
-      @answers = hand.yaku
+    if params[:hands].nil?
+      redirect_to("/")
     else
-      render("home/top")
+      hand = CardForm.new(params[:hands])
+
+      @hand_valid = Hand.new(content: params[:hands])
+      if @hand_valid.valid?
+        @answers = hand.yaku
+      else
+        render("home/top")
+      end
     end
+
 
 
     # if hand.myvalid?
