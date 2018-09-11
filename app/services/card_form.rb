@@ -69,10 +69,10 @@ class CardForm
     hand_array = @hands.split
 
     if @hands == ""
-      error_messages << "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11"
+      error_messages << "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
     end
     unless hands.split.length == 5
-      error_messages << "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11"
+      error_messages << "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
     end
     i = 1
     while i <= 5
@@ -88,49 +88,7 @@ class CardForm
   end
 end
 
-# バリデーション
-class Hand < ApplicationRecord
 
-  include ActiveModel::Model
-
-  attr_accessor :content
-
-  validates :content, presence: {message: '5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）'}
-
-  validate :hand_num
-  validate :hand_form
-  validate :my_unique
-
-  ##以下自作バリデーション
-  # 手札入力が正しい形かチェックするバリデーション
-  def hand_form
-    hands = content
-    i = 1
-    hand_array = hands.split
-    while i <= 5
-      solo_hand = hand_array[i - 1]
-      unless solo_hand =~ /^[SDHC][1-9]$/ || solo_hand =~ /^[SDHC]1[0-3]$/
-        errors.add(:content, "#{i}番目のカード文字が不正です (#{solo_hand})")
-      end
-      i = i + 1
-    end
-  end
-
-  #手札の枚数確認バリデーション
-  def hand_num
-    hands = content
-    unless hands.split.length == 5
-      errors.add(:content, "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）")
-    end
-  end
-
-  # 重複チェックバリデーション
-  def my_unique
-    hands = content
-    hand_array = hands.split
-    errors.add(:content, "同じカードが入力されています") if hand_array[0] == hand_array[1] || hand_array[1] == hand_array[2] || hand_array[2] == hand_array[3] || hand_array[3] == hand_array[4]
-  end
-end
 
 
 

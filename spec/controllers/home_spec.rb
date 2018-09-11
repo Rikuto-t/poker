@@ -21,12 +21,6 @@ describe HomeController, type: :controller do
       expect(response.status).to eq 200
     end
     context 'エラーになる時' do
-      context '再読み込みorURLに直接アクセスした時' do
-        # it 'rootにリダイレクトすること' do
-        #   get :check
-        #   expect(response).to redirect_to root_path
-        # end
-      end
       context '不正な値がpostされた時' do
         context '空白がpostされた時' do
           before do
@@ -36,7 +30,7 @@ describe HomeController, type: :controller do
             expect(response).to render_template :top
           end
           it '期待されるエラーメッセージが取得できること' do
-            expect(assigns(:hand_valid).errors.full_messages[0]).to eq " 5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）"
+            expect(assigns(:error_messages )[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
           end
         end
         context '重複するカードがpostされたとき' do
@@ -47,7 +41,7 @@ describe HomeController, type: :controller do
             expect(response).to render_template :top
           end
           it '期待されるエラーメッセージが取得できること' do
-            expect(assigns(:hand_valid).errors.full_messages[0]).to eq " 同じカードが入力されています"
+            expect(assigns(:error_messages)[0]).to eq "同じカードが入力されています"
           end
         end
         context 'カードが正しく5枚入力されていない時' do
@@ -58,7 +52,7 @@ describe HomeController, type: :controller do
             expect(response).to render_template :top
           end
           it '期待されるエラーメッセージが取得できること' do
-            expect(assigns(:hand_valid).errors.full_messages[0]).to eq " 5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）"
+            expect(assigns(:error_messages)[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
           end
         end
         context 'カードが正しく5枚入力されていない時' do
@@ -69,7 +63,7 @@ describe HomeController, type: :controller do
             expect(response).to render_template :top
           end
           it '期待されるエラーメッセージが取得できること' do
-            expect(assigns(:hand_valid).errors.full_messages[0]).to eq " 5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11）"
+            expect(assigns(:error_messages)[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
           end
         end
       end
