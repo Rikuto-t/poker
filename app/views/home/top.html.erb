@@ -2,7 +2,7 @@
   <div class=" text-center">
     <h1 class="py-5">Check a Porker Hand</h1>
     <%= form_tag("/check") do %>
-      <input type="text" name="hands" value="<%= @hand_valid.content %>">
+      <input type="text" name="hands" value="<%= @hand_valid.content unless @hand_valid.nil? %>">
       <input type="submit" value="Check">
       </div>
 

@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-  include CardForm
 
 
   def top
@@ -9,18 +8,15 @@ class HomeController < ApplicationController
 
 
   def check
-    if params[:hands].nil?
-      redirect_to("/")
-    else
-      hand = CardForm.new(params[:hands])
 
-      @hand_valid = Hand.new(content: params[:hands])
-      if @hand_valid.valid?
-        @answers = hand.yaku
-      else
-        render("home/top")
+      @hand_valid = Hand.new(content: params[:hands]) #バリデーションを発動させるためのnew
+      # バリデーションの分岐
+      if @hand_valid.valid? #バリデーションが通った時
+        hand = CardForm.new(params[:hands])
+        @answers = hand.yaku #役判定メソッドの呼び出し
+      else #バリデーションが通らなかった時
+        render("home/top") #トップページに遷移
       end
-    end
 
 
 

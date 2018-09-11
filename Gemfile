@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
+  gem 'poltergeist', '~> 1.5.1'
   gem 'selenium-webdriver'
 end
 group :development do
@@ -41,4 +42,5 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'simplecov'
 end
