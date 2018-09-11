@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'card_form'
+
 
 
 describe CardForm do
