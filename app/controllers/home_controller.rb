@@ -13,10 +13,9 @@ class HomeController < ApplicationController
     @error_messages = hand.myvalid
 
     if @error_messages == []
-      @answers = hand.yaku #役判定メソッドの呼び出し
+      @answer = hand.yaku #役判定メソッドの呼び出し
     else
       render("home/top") #トップページに遷移
     end
-
   end
 end

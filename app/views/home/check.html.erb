@@ -14,13 +14,13 @@
             <th>役名</th>
             <th>一番強い手札</th>
           </tr>
-          <% @answers.each do |answer| %>
+
             <tr>
-              <td><%= answer[:hand] %></td>
-              <td><%= answer[:answer] %></td>
-              <td><%= answer[:best] %></td>
+              <td><%= @answer[:hand] %></td>
+              <td><%= @answer[:answer] %></td>
+              <td><%= @answer[:best] %></td>
             </tr>
-          <% end %>
+
         </table>
       </div>
     <% end %>

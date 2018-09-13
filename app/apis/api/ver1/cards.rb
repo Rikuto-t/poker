@@ -4,31 +4,48 @@ module API
       resource :cards do
         require 'json'
 
-        # GET /api/v1/cards
-        desc 'Return all cards.'
-        # get do
-        #   result = []
-        #   cards = ["H1 H12 H10 H5 H3","H1 H12 H10 H5 H3"]
-        #   cards.each do |card|
-        #     hand = CardForm.new(card)
-        #     result << hand.yaku
-        #   end
-        # end
 
-
-        # GET /api/v1/cards/check
-        desc 'Return a hands.'
-        # params do
-        #   requires :cards, type: Array, desc: '手札'
-        # end
         post 'check' do
-          result = []
+          results = {result: []} #結果が入る箱
+
+
           params[:cards].each do |card|
+
             hand = CardForm.new(card)
-            result << hand.yaku
+
+            if hand.myvalid == []
+              results[:result] << hand.yaku
+            else
+              results[:error] = [{hand: card, msg: hand.myvalid[0]}]
+            end
           end
 
-          result
+          score_array = []
+          i = 0
+          while i < results.length
+            score_array << results[:result][i][:score]
+            i += 1
+          end
+
+          x = 0
+          while x < results[:result].length
+            if score_array[x] == score_array.max
+              results[:result][x][:best] = true
+            else
+              results[:result][x][:best] = false
+            end
+            x += 1
+          end
+
+          y = 0
+          while y < results[:result].length
+            results[:result][y].delete(:score)
+            y += 1
+          end
+
+
+          return results
+
         end
       end
     end

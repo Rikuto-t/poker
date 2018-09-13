@@ -8,9 +8,6 @@ class CardForm
 
   # 役判定メソッド
   def yaku
-
-    answer_array = [] #役判定結果が入る配列の箱
-
     hand_array = @hands.split #入力されたハンドを文字列から配列にしたもの
 
     hand_num_array = [] #手札の数字のみが入る配列の空箱
@@ -38,52 +35,40 @@ class CardForm
 
     if hand_suit_array.uniq.length == 1 #フラッシュ系判定
       if hand_num_array[4] - hand_num_array[0] == 4 || hand_num_array == [1, 10, 11, 12, 13]
-        answer_array = [{hand: @hands, answer: "ストレートフラッシュ", best: false}]
-        @score << 9
+        answer_hash = {hand: @hands, answer: "ストレートフラッシュ", score: 9}
       else
-        answer_array.push({hand: @hands, answer: "フラッシュ", best: false})
-        @score << 6
+        answer_hash = {hand: @hands, answer: "フラッシュ", score: 6}
       end
     elsif hand_num_array[4] - hand_num_array[0] == 4 || hand_num_array == [1, 10, 11, 12, 13]
-      answer_array.push({hand: @hands, answer: "ストレート", best: false})
-      @score << 5
+      answer_hash = {hand: @hands, answer: "ストレート", score: 5}
     elsif pairs_array == [4]
-      answer_array.push({hand: @hands, answer: "4カード", best: false})
-      @score << 8
+      answer_hash = {hand: @hands, answer: "4カード", score: 8}
     elsif pairs_array.sort == [2, 3]
-      answer_array.push({hand: @hands, answer: "フルハウス", best: false})
-      @score << 7
+      answer_hash = {hand: @hands, answer: "フルハウス", score: 7}
     elsif pairs_array == [3]
-      answer_array.push({hand: @hands, answer: "3カード", best: false})
-      @score << 4
+      answer_hash = {hand: @hands, answer: "3カード", score: 4}
     elsif pairs_array == [2, 2]
-      answer_array.push({hand: @hands, answer: "2ペア", best: false})
-      @score << 3
+      answer_hash = {hand: @hands, answer: "2ペア", score: 3}
     elsif pairs_array == [2]
-      answer_array.push({hand: @hands, answer: "ワンペア", best: false})
-      @score << 2
+      answer_hash = {hand: @hands, answer: "ワンペア", score: 2}
     else
-      answer_array.push({hand: @hands, answer: "ハイカード", best: false})
-      @score << 1
+      answer_hash = {hand: @hands, answer: "ハイカード", score: 1}
     end
 
-
-
-    
     # 戻り値
-    answer_array
+    answer_hash
   end
 
-  def judge_strength
-    # 一番強いカードの:bestをfalseからtrueに変更
-    y = 0
-    while y < @score.length
-      if @score[y] == @score.max
-        answer_array[y][:best] = true
-      end
-      y += 1
-    end
-  end
+  # def judge_strength
+  #   # 一番強いカードの:scoreをfalseからtrueに変更
+  #   i = 0
+  #   while i < @score.length
+  #     if @score[i] == @score.max
+  #       self[i][:score] = true
+  #     end
+  #     i += 1
+  #   end
+  # end
 
   #バリデーションメソッド
   def myvalid

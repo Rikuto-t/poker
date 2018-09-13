@@ -75,7 +75,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "ストレートフラッシュ"
+          expect(assigns(:answer)[:answer]).to eq "ストレートフラッシュ"
         end
       end
       context '4カード役がpostされた時' do
@@ -86,7 +86,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "4カード"
+          expect(assigns(:answer)[:answer]).to eq "4カード"
         end
       end
       context 'フルハウス役がpostされた時' do
@@ -97,7 +97,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "フルハウス"
+          expect(assigns(:answer)[:answer]).to eq "フルハウス"
         end
       end
       context 'フラッシュ役がpostされた時' do
@@ -108,7 +108,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "フラッシュ"
+          expect(assigns(:answer)[:answer]).to eq "フラッシュ"
         end
       end
       context 'ストレート役がpostされた時' do
@@ -119,7 +119,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "ストレート"
+          expect(assigns(:answer)[:answer]).to eq "ストレート"
         end
       end
       context '3カード役がpostされた時' do
@@ -130,7 +130,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "3カード"
+          expect(assigns(:answer)[:answer]).to eq "3カード"
         end
       end
       context '2ペア役がpostされた時' do
@@ -142,7 +142,7 @@ describe HomeController, type: :controller do
         end
         
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "2ペア"
+          expect(assigns(:answer)[:answer]).to eq "2ペア"
         end
       end
       context 'ワンペア役がpostされた時' do
@@ -153,7 +153,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "ワンペア"
+          expect(assigns(:answer)[:answer]).to eq "ワンペア"
         end
       end
       context 'ハイカード役がpostされた時' do
@@ -164,7 +164,7 @@ describe HomeController, type: :controller do
           expect(response).to render_template :check
         end
         it '期待される値がインスタンス変数に代入されること' do
-          expect(assigns(:answers)[0][:answer]).to eq "ハイカード"
+          expect(assigns(:answer)[:answer]).to eq "ハイカード"
         end
       end
     end
