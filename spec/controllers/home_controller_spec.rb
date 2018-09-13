@@ -1,7 +1,4 @@
 require 'rails_helper'
-require 'card_form'
-require 'home_controller'
-
 
 describe HomeController, type: :controller do
   describe 'Get #top' do

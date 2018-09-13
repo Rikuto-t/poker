@@ -26,7 +26,7 @@ class CardForm
 
     #同じ数字のカードをカウントしてpairs_arrayに配列として入れる
     x = 1
-    pairs_array = Array.new
+    pairs_array = []
     while x < 14
       if hand_num_array.count {|n| n == x} > 1
         pairs_array.push(hand_num_array.count {|n| n == x})
@@ -34,36 +34,58 @@ class CardForm
       x += 1
     end
 
+    @score = [] #各役のスコアを入れる箱
+
     if hand_suit_array.uniq.length == 1 #フラッシュ系判定
       if hand_num_array[4] - hand_num_array[0] == 4 || hand_num_array == [1, 10, 11, 12, 13]
-        answer_array = [{hand: @hands, answer: "ストレートフラッシュ"}]
+        answer_array = [{hand: @hands, answer: "ストレートフラッシュ", best: false}]
+        @score << 9
       else
-        answer_array.push({hand: @hands, answer: "フラッシュ"})
+        answer_array.push({hand: @hands, answer: "フラッシュ", best: false})
+        @score << 6
       end
     elsif hand_num_array[4] - hand_num_array[0] == 4 || hand_num_array == [1, 10, 11, 12, 13]
-      answer_array.push({hand: @hands, answer: "ストレート"})
+      answer_array.push({hand: @hands, answer: "ストレート", best: false})
+      @score << 5
     elsif pairs_array == [4]
-      answer_array.push({hand: @hands, answer: "4カード"})
+      answer_array.push({hand: @hands, answer: "4カード", best: false})
+      @score << 8
     elsif pairs_array.sort == [2, 3]
-      answer_array.push({hand: @hands, answer: "フルハウス"})
+      answer_array.push({hand: @hands, answer: "フルハウス", best: false})
+      @score << 7
     elsif pairs_array == [3]
-      answer_array.push({hand: @hands, answer: "3カード"})
+      answer_array.push({hand: @hands, answer: "3カード", best: false})
+      @score << 4
     elsif pairs_array == [2, 2]
-      answer_array.push({hand: @hands, answer: "2ペア"})
+      answer_array.push({hand: @hands, answer: "2ペア", best: false})
+      @score << 3
     elsif pairs_array == [2]
-      answer_array.push({hand: @hands, answer: "ワンペア"})
+      answer_array.push({hand: @hands, answer: "ワンペア", best: false})
+      @score << 2
     else
-      answer_array.push({hand: @hands, answer: "ハイカード"})
-
+      answer_array.push({hand: @hands, answer: "ハイカード", best: false})
+      @score << 1
     end
 
-    # # 一番強いカードの:bestをtrueに変更
-    # answer_array[score.index(score.max)][:best] = true
 
+
+    
     # 戻り値
     answer_array
   end
 
+  def judge_strength
+    # 一番強いカードの:bestをfalseからtrueに変更
+    y = 0
+    while y < @score.length
+      if @score[y] == @score.max
+        answer_array[y][:best] = true
+      end
+      y += 1
+    end
+  end
+
+  #バリデーションメソッド
   def myvalid
     error_messages = []
     hand_array = @hands.split
@@ -82,7 +104,7 @@ class CardForm
       end
       i = i + 1
     end
-    error_messages <<  "同じカードが入力されています" if hand_array[0] == hand_array[1] || hand_array[1] == hand_array[2] || hand_array[2] == hand_array[3] || hand_array[3] == hand_array[4]
+    error_messages << "同じカードが入力されています" if hand_array[0] == hand_array[1] || hand_array[1] == hand_array[2] || hand_array[2] == hand_array[3] || hand_array[3] == hand_array[4]
 
     return error_messages
   end

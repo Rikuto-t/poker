@@ -46,13 +46,13 @@ describe CardForm do
         expect(@hand.myvalid[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
       end
     end
-    context '重複するカードがpostされたとき' do
+    context '重複する値が与えられたとき' do
       it '期待されるエラーメッサージが返されること' do
-        @hand = CardForm.new("")
-        expect(@hand.myvalid[0]).to eq "重複するカードがpostされたとき"
+        @hand = CardForm.new("S8 S7 S6 S5 S5")
+        expect(@hand.myvalid[0]).to eq "同じカードが入力されています"
       end
     end
-    context 'カードが正しく5枚入力されていない時' do
+    context '正しく5枚分の値が与えられなかった時' do
       it '期待されるエラーメッサージが返されること' do
         @hand = CardForm.new("")
         expect(@hand.myvalid[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"

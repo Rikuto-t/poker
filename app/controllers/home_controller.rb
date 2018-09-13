@@ -6,7 +6,6 @@ class HomeController < ApplicationController
 
   def check
 
-
     @hand = params[:hands]
 
     hand = CardForm.new(@hand)

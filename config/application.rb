@@ -31,8 +31,15 @@ module RailsBootstrap
     #
     # # バリデーションの日本語化
     config.i18n.default_locale = :ja
+
+
+    # GrapeのAPIディレクトリ読み取り設定
+    config.paths.add File.join('app', 'apis'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'apis', '*')]
   end
 end
+
+
 
 
 
