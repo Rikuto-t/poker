@@ -87,15 +87,25 @@ describe "api", :type => :request do
 
   context '不正なアクセスの時' do
     context 'getでアクセスした時' do
-      it 'リクエストは404エラーとなること' do
+      before do
         get '/api/v1/cards/check'
+      end
+      it 'リクエストは404エラーとなること' do
         expect(response.status).to eq 404
+      end
+      it '正しいエラーメッセージを返すこと' do
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"error": [{"msg": "不正なURLです。"}]})
       end
     end
     context '不正なURLでアクセスした時' do
-      it 'リクエストは404エラーとなること' do
+      before do
         post '/api/v1/'
+      end
+      it 'リクエストは404エラーとなること' do
         expect(response.status).to eq 404
+      end
+      it '正しいエラーメッセージを返すこと' do
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"error": [{"msg": "不正なURLです。"}]})
       end
     end
   end
