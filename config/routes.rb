@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   mount API::Root => '/'
 
-  # get '*unmatched_route', to: 'application#render_404'
+  get '*unmatched_route' => 'application#render_404'
 
 
   root to: 'visitors#index'
