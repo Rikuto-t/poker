@@ -1,6 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # herokuで画像が表示されない問題の解決
+  # ( https://morizyun.github.io/ruby/rails-troubleshoot-no-route-match-assets.html )
+  config.public_file_server.enabled = true
+
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
