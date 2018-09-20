@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def top
-    @hand_valid = Hand.new
+
   end
 
   def check
