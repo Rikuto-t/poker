@@ -5,7 +5,6 @@ module API
     format :json
 
     mount API::Ver1::Root
-    # mount API::Ver2::Root
 
     # 不正なURLにアクセスした時の処理
     route :any, '*path' do
