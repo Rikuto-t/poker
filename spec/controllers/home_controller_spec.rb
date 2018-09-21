@@ -41,7 +41,7 @@ describe HomeController, type: :controller do
             expect(assigns(:error_messages)[0]).to eq "同じカードが入力されています"
           end
         end
-        context 'カードが正しく5枚入力されていない時' do
+        context 'カードが5枚入力されていない時' do
           before do
             post :check, params: {hands: "S8 S7 S6 S5"}
           end
@@ -52,15 +52,16 @@ describe HomeController, type: :controller do
             expect(assigns(:error_messages)[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
           end
         end
-        context 'カードが正しく5枚入力されていない時' do
+        context 'カードの正しい値が入力されていない時' do
           before do
-            post :check, params: {hands: "S8 S7 S6 S5"}
+            post :check, params: {hands: "S8 S7 S6 S5adf fads"}
           end
           it ':topテンプレートを表示すること' do
             expect(response).to render_template :top
           end
           it '期待されるエラーメッセージが取得できること' do
-            expect(assigns(:error_messages)[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
+            expect(assigns(:error_messages)[0]).to eq "4番目のカード文字が不正です (S5adf)"
+            expect(assigns(:error_messages)[1]).to eq "5番目のカード文字が不正です (fads)"
           end
         end
       end

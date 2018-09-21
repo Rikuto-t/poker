@@ -69,6 +69,10 @@ describe "api", :type => :request do
         post '/api/v1/cards/check', params: {cards: ["C13 D12 C11 H8 H"]}
         expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"errors": [{"hand": "C13 D12 C11 H8 H", "msg": "5番目のカード文字が不正です (H)"}]})
       end
+      it '正しいエラーメッセージを返すこと' do
+        post '/api/v1/cards/check', params: {cards: ["C13 D12 C11 Hd8 Hfdas"]}
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"errors": [{"hand": "C13 D12 C11 Hd8 Hfdas", "msg": "4番目のカード文字が不正です (Hd8)"}, {"hand": "C13 D12 C11 Hd8 Hfdas", "msg": "5番目のカード文字が不正です (Hfdas)"}]})
+      end
     end
     context '期待されない値が複数組postされた時' do
       it '正しいエラーメッセージを返すこと' do

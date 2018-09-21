@@ -24,7 +24,9 @@ module API
             if hand.get_error_msg.empty? #バリデーションが通った時
               results << hand.yaku
             else #バリデーションが通らなかった時
-              errors << {hand: card, msg: hand.get_error_msg[0]}
+              hand.get_error_msg.each do |error|
+                errors << {hand: card, msg: error}
+              end
             end
           end
 

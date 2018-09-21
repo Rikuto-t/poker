@@ -2,6 +2,7 @@ class CardForm
 
   include HomeHelper
   attr_accessor :hands
+  attr_accessor :error_messages
 
 
   # エラーメッセージ
@@ -106,6 +107,34 @@ class CardForm
     return error_messages
 
   end
+
+  # def valid?
+  #
+  #   @error_messages = []
+  #
+  #   if @hands.empty?
+  #     @error_messages << ERR_MSG_INVALID_HANDS
+  #     return false
+  #   end
+  #
+  #   if hands.split.length != 5
+  #     @error_messages << ERR_MSG_INVALID_HANDS
+  #     return false
+  #   end
+  #
+  #   @hand_array.each_with_index do |solo_hand, index|
+  #     @error_messages << "#{index + 1}番目のカード文字が不正です (#{solo_hand})" unless solo_hand =~ /^[SDHC][1-9]$/ || solo_hand =~ /^[SDHC]1[0-3]$/
+  #   end
+  #
+  #   @error_messages << ERR_MSG_DUPLICATE_HANDS if @hand_array.count - @hand_array.uniq.count > 0 && @error_messages.empty?
+  #
+  #
+  #   return false
+  #
+  # end
+  #
+  # return true
+
 end
 
 
