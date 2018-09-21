@@ -43,51 +43,21 @@ describe CardForm do
     context '空白が与えられた時' do
       it '期待されるエラーメッサージが返されること' do
         @hand = CardForm.new("")
-        expect(@hand.myvalid[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
+        expect(@hand.get_error_msg[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
       end
     end
     context '重複する値が与えられたとき' do
       it '期待されるエラーメッサージが返されること' do
         @hand = CardForm.new("S8 S7 S6 S5 S5")
-        expect(@hand.myvalid[0]).to eq "同じカードが入力されています"
+        expect(@hand.get_error_msg[0]).to eq "同じカードが入力されています"
       end
     end
     context '正しく5枚分の値が与えられなかった時' do
       it '期待されるエラーメッサージが返されること' do
         @hand = CardForm.new("")
-        expect(@hand.myvalid[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
+        expect(@hand.get_error_msg[0]).to eq "5つのカード指定文字を半角スペース区切りで入力してください。（例：S1 H3 D9 C13 S11)"
       end
     end
   end
 end
 
-
-#
-# describe Hand, type: :model do
-#   context '期待される値が入力された時' do
-#     it 'バリデーションをパスすること' do
-#       @hand = Hand.new(content: "S1 H3 D9 C13 S11")
-#       expect(@hand).to be_valid
-#     end
-#   end
-#   context '不正な値が入力された時' do
-#     context '空白が入力された時' do
-#       it 'バリデーションをパスしないこと' do
-#         @hand = Hand.new(content: "")
-#         expect(@hand).not_to be_valid
-#       end
-#     end
-#     context '重複するカードがpostされたとき' do
-#       it 'バリデーションをパスしないこと' do
-#         @hand = Hand.new(content: "S8 S7 S6 S5 S5")
-#         expect(@hand).not_to be_valid
-#       end
-#     end
-#     context '重複するカードがpostされたとき' do
-#       it 'バリデーションをパスしないこと' do
-#         @hand = Hand.new(content: "S8 S7 S6 S5 S5")
-#         expect(@hand).not_to be_valid
-#       end
-#     end
-#   end
-# end

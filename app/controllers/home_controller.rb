@@ -10,9 +10,9 @@ class HomeController < ApplicationController
 
     hand = CardForm.new(@hand)
 
-    @error_messages = hand.myvalid
+    @error_messages = hand.get_error_msg
 
-    if @error_messages == []
+    if hand.get_error_msg.empty?
       @answer = hand.yaku #役判定メソッドの呼び出し
     else
       render("home/top") #トップページに遷移

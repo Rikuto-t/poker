@@ -74,7 +74,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it 'ストレートフラッシュがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "ストレートフラッシュ"
         end
       end
@@ -85,7 +85,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it '4カードがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "4カード"
         end
       end
@@ -96,7 +96,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it 'フルハウスがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "フルハウス"
         end
       end
@@ -107,7 +107,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it 'フラッシュがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "フラッシュ"
         end
       end
@@ -118,7 +118,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it 'ストレートがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "ストレート"
         end
       end
@@ -129,7 +129,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it '3カードがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "3カード"
         end
       end
@@ -140,8 +140,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        
-        it '期待される値がインスタンス変数に代入されること' do
+        it '2ペアがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "2ペア"
         end
       end
@@ -152,7 +151,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it 'ワンペアがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "ワンペア"
         end
       end
@@ -163,7 +162,7 @@ describe HomeController, type: :controller do
         it ':checkテンプレートを表示すること' do
           expect(response).to render_template :check
         end
-        it '期待される値がインスタンス変数に代入されること' do
+        it 'ハイカードがインスタンス変数に代入されること' do
           expect(assigns(:answer)[:answer]).to eq "ハイカード"
         end
       end

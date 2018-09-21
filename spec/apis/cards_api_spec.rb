@@ -12,45 +12,45 @@ describe "api", :type => :request do
     context '期待される値が1組postされた時' do
       it 'ストレートフラッシュと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["H1 H13 H12 H11 H10"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "H1 H13 H12 H11 H10", "answer": "ストレートフラッシュ", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "H1 H13 H12 H11 H10", "answer": "ストレートフラッシュ", "best": true}]})
       end
       it '4カードと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["D6 H6 S6 C6 S13"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "D6 H6 S6 C6 S13", "answer": "4カード", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "D6 H6 S6 C6 S13", "answer": "4カード", "best": true}]})
       end
       it 'フルハウスと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["H9 C9 S9 H1 C1"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "H9 C9 S9 H1 C1", "answer": "フルハウス", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "H9 C9 S9 H1 C1", "answer": "フルハウス", "best": true}]})
       end
       it 'フラッシュと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["S8 S7 S6 S5 S1"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "S8 S7 S6 S5 S1", "answer": "フラッシュ", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "S8 S7 S6 S5 S1", "answer": "フラッシュ", "best": true}]})
       end
       it 'ストレートと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["D6 S5 D4 H3 C2"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "D6 S5 D4 H3 C2", "answer": "ストレート", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "D6 S5 D4 H3 C2", "answer": "ストレート", "best": true}]})
       end
       it '3カードと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["S12 C12 D12 S5 C3"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "S12 C12 D12 S5 C3", "answer": "3カード", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "S12 C12 D12 S5 C3", "answer": "3カード", "best": true}]})
       end
       it '2ペアと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["H13 D13 C2 D2 H11"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "H13 D13 C2 D2 H11", "answer": "2ペア", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "H13 D13 C2 D2 H11", "answer": "2ペア", "best": true}]})
       end
       it 'ワンペアと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["H13 D13 C2 D3 H1"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "H13 D13 C2 D3 H1", "answer": "ワンペア", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "H13 D13 C2 D3 H1", "answer": "ワンペア", "best": true}]})
       end
       it 'ハイカードと判定すること' do
         post '/api/v1/cards/check', params: {cards: ["C13 D12 C11 H8 H10"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "C13 D12 C11 H8 H10", "answer": "ハイカード", "best": true}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "C13 D12 C11 H8 H10", "answer": "ハイカード", "best": true}]})
       end
     end
     context '期待される値が複数組postされた時' do
       it '正しい値を返すとこと' do
         post '/api/v1/cards/check', params: {cards: ["H1 H13 H12 H11 H10", "H9 C9 S9 H2 C2", "C13 D12 C11 H8 H2"]}
-        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "H1 H13 H12 H11 H10", "answer": "ストレートフラッシュ", "best": true}, {"hand": "H9 C9 S9 H2 C2", "answer": "フルハウス", "best": false}, {"hand": "C13 D12 C11 H8 H2", "answer": "ハイカード", "best": false}]})
+        expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "H1 H13 H12 H11 H10", "answer": "ストレートフラッシュ", "best": true}, {"hand": "H9 C9 S9 H2 C2", "answer": "フルハウス", "best": false}, {"hand": "C13 D12 C11 H8 H2", "answer": "ハイカード", "best": false}]})
       end
     end
   end
@@ -81,7 +81,7 @@ describe "api", :type => :request do
   context '期待される値と期待されない値が共にpostされた時' do
     it '正しい役判定結果とエラーメッセージを共に返すこと' do
       post '/api/v1/cards/check', params: {cards: ["H1 H13 H12 H11 H10", "H9 C9 S9 H2 C2", "C13 D12 C11 H8 H8"]}
-      expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"hand_result": [{"hand": "H1 H13 H12 H11 H10", "answer": "ストレートフラッシュ", "best": true}, {"hand": "H9 C9 S9 H2 C2", "answer": "フルハウス", "best": false}], "errors": [{"hand": "C13 D12 C11 H8 H8", "msg": "同じカードが入力されています"}]})
+      expect(JSON.parse(response.body, {symbolize_names: true})).to eq ({"results": [{"hand": "H1 H13 H12 H11 H10", "answer": "ストレートフラッシュ", "best": true}, {"hand": "H9 C9 S9 H2 C2", "answer": "フルハウス", "best": false}], "errors": [{"hand": "C13 D12 C11 H8 H8", "msg": "同じカードが入力されています"}]})
     end
   end
 

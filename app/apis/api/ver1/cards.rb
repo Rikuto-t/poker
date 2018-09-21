@@ -1,10 +1,11 @@
+require 'json'
 module API
   module Ver1
     class Cards < Grape::API
 
-      resource :cards do
-        require 'json'
+      SYM_CARDS = :cards
 
+      resource :cards do
         # 不正なリクエスト時の処理
         rescue_from :all do |e|
           error!({error: [{"msg": "不正なリクエストです。"}]}, 400)
@@ -12,57 +13,51 @@ module API
 
         #メイン処理
         post 'check' do
-
-          results = {hand_result: [], errors: []} #結果が入る箱
-
-          params[:cards].each do |card|
+          
+          results = []
+          errors = []
+          
+          params[SYM_CARDS].each do |card|
 
             hand = CardForm.new(card)
 
-            if hand.myvalid == [] #バリデーションが通った時
-              results[:hand_result] << hand.yaku
-            else #バリデーションを通らなかった時
-              results[:errors] << {hand: card, msg: hand.myvalid[0]}
+            if hand.get_error_msg.empty? #バリデーションが通った時
+              results << hand.yaku
+            else #バリデーションが通らなかった時
+              errors << {hand: card, msg: hand.get_error_msg[0]}
             end
           end
 
-          # 役のscoreをresultsに追加する処理
-          if results[:hand_result] != []
-            score_array = [] #役のscoreを入れる箱
+          # 役のscoreをresponseに追加する処理
+          if results.present?
 
-            for i in results[:hand_result]
-              score_array << i[:score]
+            score = [] #役のscoreを入れる箱
+
+            results.each do |result|
+              score << result[:score]
             end
 
-            #上記の処理で追加したscoreを利用し、強さを判定する処理
-            x = 0
-            for i in results[:hand_result]
-              if score_array[x] == score_array.max #スコアが入った配列中での最大値と等しい時
-                i[:best] = true #ハッシュに best: true　を入れる
-              else
-                i[:best] = false #ハッシュに best: false を入れる
+            results.each_with_index do |result, index|
+              if score[index] == score.max #スコアが入った配列中での最大値と等しい時
+                result[:best] = true #ハッシュに best: true　を入れる
+              else #等しくない時
+                result[:best] = false #ハッシュに best: false を入れる
               end
-              x += 1
             end
 
-            # results[:hand_result]のscore要素を削除する処理
-            for i in results[:hand_result]
-              i.delete(:score)
+            # resultsからscore要素を削除する
+            results.each do |result|
+              result.delete(:score)
             end
 
-          else
-
-            results.delete(:hand_result) # resultsの中身がエラーのみの時はresultsからhand_result要素を削除する
-
           end
+          
+          response = {}
+          response[:results] = results if results.present?
+          response[:errors] = errors if errors.present?
 
-          # エラーが出なかった時はresultsからerror要素を削除する
-          if results[:errors] == []
-            results.delete(:errors)
-          end
-
-          return results #戻り値
-
+          return response #戻り値
+          
         end
       end
     end
