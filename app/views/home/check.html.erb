@@ -1,5 +1,27 @@
-<h1>Check a Porker Hand</h1>
-<%= form_tag("/home/check") do %>
-  <input type="text" name="hand" value="<%= @hand %>">
-  <input type="submit">
-<% end %>
+<div class="bg">
+  <div class=" text-center">
+    <h1 class="py-5">Check a Porker Hand</h1>
+    <%= form_tag("/check") do %>
+      <input type="text" name="hands" value="<%= @hand %>">
+      <input type="submit" value="Check">
+      </div>
+
+      <!--    <p class="py-5">役：<%#= @answer %></p>-->
+      <div class="bg-mask">
+        <table class="table my-5 table-striped">
+          <tr>
+            <th>手札</th>
+            <th>役名</th>
+<!--            <th>一番強い手札</th>-->
+          </tr>
+
+            <tr>
+              <td><%= @answer[:hand] %></td>
+              <td><%= @answer[:answer] %></td>
+<!--              <td><%#= @answer[:best] %></td>-->
+            </tr>
+
+        </table>
+      </div>
+    <% end %>
+    </div>

@@ -2,6 +2,8 @@ require_relative 'boot'
 
 require 'rails/all'
 
+
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -26,5 +28,19 @@ module RailsBootstrap
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    #
+    # # バリデーションの日本語化
+    config.i18n.default_locale = :ja
+
+
+    # GrapeのAPIディレクトリ読み取り設定
+    config.paths.add File.join('app', 'apis'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'apis', '*')]
   end
 end
+
+
+
+
+
+

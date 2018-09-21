@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
 
   before_action :show_flash
 
+  rescue_from ActionController::RoutingError, ActiveRecord::RecordNotFound, with: :render_404
+  def render_404
+    redirect_to "/"
+  end
+
   private
 
 

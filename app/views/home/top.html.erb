@@ -1,0 +1,21 @@
+<div class="bg">
+  <div class=" text-center">
+    <h1 class="py-5">Check a Porker Hand</h1>
+    <%= form_tag("/check") do %>
+      <input type="text" name="hands" value="<%= @hand %>">
+      <input type="submit" value="Check">
+      </div>
+
+      <!--      エラーメッセージ-->
+      <% unless @error_messages.blank? %>
+        <div class="alert-danger text-center mt-3">
+          <!--        エラーを複数同時に表示する場合は以下コメントアウト部を使用-->
+          <% @error_messages.each do |message| %>
+          <%= message %> <br>
+          <% end %>
+          <%#= @error_messages[0] %>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+</div>
